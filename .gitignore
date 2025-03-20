@@ -1,0 +1,40 @@
+# Compiled binaries
+*.exe
+*.out
+*.o
+*.obj
+*.so
+*.dll
+*.a
+*.lib
+
+# CMake build files
+/build/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+
+# Pybind11 related
+*.pyd
+*.pyc
+*.pyo
+__pycache__/
+
+# VSCode settings
+.vscode/
+.settings/
+
+# Python virtual environments
+env/
+.env/
+
+# Logs and temp files
+*.log
+*.tmp
+
+# System files
+.DS_Store
+Thumbs.db
+
+build
