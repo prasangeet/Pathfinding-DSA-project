@@ -29,7 +29,11 @@ SECRET_KEY = os.getenv('SECRET_KEY', 'fallback_secret_key')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "localhost:3000",  # Add this
+]
 
 
 # Application definition
@@ -45,7 +49,38 @@ INSTALLED_APPS = [
     'maps'
 ]
 
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:3000",  # Allow frontend running on Next.js
+    "http://127.0.0.1:3000",
+]
+
+CORS_ALLOW_METHODS = [
+    "GET",
+    "POST",
+    "PUT",
+    "DELETE",
+    "OPTIONS",
+]
+
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:3000",  # Add frontend origin
+]
+
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "authorization",
+    "content-type",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
+]
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -85,7 +120,10 @@ CACHES = {
             "SOCKET_TIMEOUT": 5,
         }
     }
+
 }
+
+
 
 
 # Database

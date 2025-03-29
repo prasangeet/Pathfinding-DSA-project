@@ -4,6 +4,7 @@ from django.shortcuts import render
 from django.http import JsonResponse
 from django.core.cache import cache
 from .models import Node, Edge
+from django.views.decorators.csrf import csrf_exempt
 
 def load_graph():
     """
@@ -118,33 +119,76 @@ def astar(graph, start, end):
 def find_shortest_path(request, algorithm='astar'):
     """
     API endpoint to find the shortest path using either A* or Dijkstra's algorithm.
+    Ensures the path is returned in the correct order with coordinates sorted by cumulative distance.
     """
-    start_lat = float(request.GET.get('start_lat'))
-    start_lon = float(request.GET.get('start_lon'))
-    end_lat = float(request.GET.get('end_lat'))
-    end_lon = float(request.GET.get('end_lon'))
-    
+    try:
+        start_lat = float(request.GET.get('start_lat'))
+        start_lon = float(request.GET.get('start_lon'))
+        end_lat = float(request.GET.get('end_lat'))
+        end_lon = float(request.GET.get('end_lon'))
+    except (TypeError, ValueError):
+        return JsonResponse({"error": "Invalid input parameters"}, status=400)
+
     start_node = find_closest_node(start_lat, start_lon)
     end_node = find_closest_node(end_lat, end_lon)
-    
+
     if not start_node or not end_node:
         return JsonResponse({"error": "Could not find nearest nodes"}, status=400)
-    
+
     graph = load_graph()
-    
+
     if algorithm == 'dijkstra':
         distance, path = dijkstra(graph, start_node, end_node)
     else:
         distance, path = astar(graph, start_node, end_node)
-    
-    return JsonResponse({"distance": distance, "path": path})
 
+    if not path:
+        return JsonResponse({"error": "No path found"}, status=404)
+
+    # Fetch nodes maintaining path order
+    nodes = list(Node.objects.filter(id__in=path))
+
+    # Compute cumulative distances along the path
+    path_coordinates = []
+    total_distance = 0
+
+    for i in range(len(path) - 1):
+        node1 = next((n for n in nodes if n.id == path[i]), None)
+        node2 = next((n for n in nodes if n.id == path[i + 1]), None)
+
+        if node1 and node2:
+            distance_between = haversine(node1.latitude, node1.longitude, node2.latitude, node2.longitude)
+            total_distance += distance_between
+
+            path_coordinates.append({
+                "lat": node1.latitude,
+                "lon": node1.longitude,
+                "cumulative_distance": total_distance
+            })
+
+    # Add final destination
+    last_node = next((n for n in nodes if n.id == path[-1]), None)
+    if last_node:
+        path_coordinates.append({
+            "lat": last_node.latitude,
+            "lon": last_node.longitude,
+            "cumulative_distance": total_distance
+        })
+
+    # ✅ Sort based on cumulative distance from the start
+    path_coordinates.sort(key=lambda x: x["cumulative_distance"])
+
+    return JsonResponse({"distance": distance, "path": path_coordinates})
+
+@csrf_exempt
 def dijkstra_api(request):
     """
     API for finding the shortest path using Dijkstra's algorithm.
     """
     return find_shortest_path(request, algorithm='dijkstra')
 
+
+@csrf_exempt
 def astar_api(request):
     """
     API for finding the shortest path using A* algorithm.
