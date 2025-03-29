@@ -76,6 +76,18 @@ TEMPLATES = [
 WSGI_APPLICATION = 'shortest_path.wsgi.application'
 
 
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": f"redis://{os.getenv('REDIS_USERNAME')}:{os.getenv('REDIS_PASSWORD')}@{os.getenv('REDIS_HOST')}:{os.getenv('REDIS_PORT')}/0",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+            "SOCKET_TIMEOUT": 5,
+        }
+    }
+}
+
+
 # Database
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
