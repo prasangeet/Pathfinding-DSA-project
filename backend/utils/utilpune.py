@@ -13,7 +13,7 @@ nodes = set()
 edges = []
 
 # Load and process the GeoJSON in chunks
-with fiona.open(r"./pune.geojson", "r") as geojson_file:
+with fiona.open(r"./pune.osm.geojson", "r") as geojson_file:
     for feature in geojson_file:
         properties = feature["properties"]
         geometry = feature["geometry"]
