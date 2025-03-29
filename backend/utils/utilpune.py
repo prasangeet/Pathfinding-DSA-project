@@ -29,7 +29,7 @@ with fiona.open(r"./pune.osm.geojson", "r") as geojson_file:
                     nodes.add(tuple(coord))  # Save as (lon, lat) tuple
 
                 for i in range(len(coords) - 1):
-                    start, end = tuple(coords[i]), tuple(coords[i + 1])
+                    start, end = tuple(coords[i]), tuple(coords[i + 1]) 
                     length = LineString([start, end]).length
                     edges.append((start, end, length))
 
