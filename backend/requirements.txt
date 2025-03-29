@@ -1,12 +1,13 @@
 django
 django-admin
 django-cors-headers
-fiona
 geopandas
 shapely
 pandas
 psycopg2
 python-dotenv
+pytz
+six
 
 packaging
 numpy>=1.22

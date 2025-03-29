@@ -1,3 +1,7 @@
+import os 
+from dotenv import load_dotenv
+load_dotenv()
+
 import geopandas as gpd
 import pandas as pd
 import psycopg2
@@ -57,10 +61,10 @@ edges_df.drop(['start', 'end'], axis=1, inplace=True)
 # Connect to PostgreSQL
 try:
     conn = psycopg2.connect(
-        dbname="pathfindingdsaproject",
-        user="postgres",
-        password="ppd12345",
-        host="localhost"
+        dbname=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'),
+        host=os.getenv('DB_HOST')
     )
     cur = conn.cursor()
 
