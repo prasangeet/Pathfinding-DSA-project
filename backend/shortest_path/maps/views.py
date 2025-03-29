@@ -1,6 +1,6 @@
 import math
 
-
+import heapq
 from django.shortcuts import render
 from django.core.cache import cache
 from .models import Node, Edge
@@ -47,4 +47,57 @@ def find_closest_node(lat,lon):
             min_distance = distance
             closest_node = node.id
     return closest_node
+
     
+def dijkstra(graph, start, end):
+    """
+    Dijkstra's algorithm for finding the shortest path between start and end nodes.
+    
+    Args:
+        graph: The graph representation as an adjacency list
+        start: The starting node ID
+        end: The destination node ID
+        
+    Returns:
+        tuple: (distance, path) where distance is the shortest path cost and path is a list of nodes
+    """
+
+    queue = [(0, start, [])] #(distance, node, path)
+    visited = set()
+
+    while queue:
+        ## Get the node with the smallest Distance
+        (distance, current_node, path) = heapq.heappop(queue)
+
+        if current_node == end:
+            return distance, path + [current_node]
+        
+        # Skip if we have already processed this node
+        if current_node in visited:
+            continue
+        
+        # Mark as visited
+        visited.add(current_node)
+
+        for neighbor, weight in graph.get(current_node, []):
+            if neighbor not in visited:
+                # Calculate the distance
+                new_distance = distance + weight
+                # Add to the priority Queue
+                heapq.heappush(queue, (new_distance, neighbor, path + [current_node]))
+    
+    return float('inf'), []
+
+def heuristic(node1_id, node2_id):
+    """
+    Heuristic function for A* algorithm - estimates distance between two nodes
+    """
+
+    # Get node coordinates from database
+    node1 = Node.objects.get(id = node1_id)
+    node2 = Node.objects.get(id = node2_id)
+
+    # Calculate the haversine Distance
+    return haversine(node1.latitude, node1.longitude, node2.latitude, node2.longitude)
+
+
