@@ -1,7 +1,21 @@
 import geopandas as gpd
 import pandas as pd
-from shapely.geometry import LineString
 import psycopg2
+from shapely.geometry import LineString
+from math import radians, sin, cos, sqrt, atan2
+
+# Function to calculate Haversine distance
+def haversine(lat1, lon1, lat2, lon2):
+    R = 6371  # Radius of Earth in km
+    
+    lat1, lon1, lat2, lon2 = map(radians, [lat1, lon1, lat2, lon2])
+    dlat = lat2 - lat1
+    dlon = lon2 - lon1
+    
+    a = sin(dlat / 2) ** 2 + cos(lat1) * cos(lat2) * sin(dlon / 2) ** 2
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    
+    return R * c  # Distance in km
 
 # Load road data from GeoJSON
 roads = gpd.read_file(r"./Jodhpur/lines.geojson")
@@ -19,10 +33,12 @@ for _, road in roads.iterrows():
     
     for coord in coords:
         nodes.add(coord)
-
+    
     for i in range(len(coords) - 1):
         start, end = coords[i], coords[i + 1]
-        length = LineString([start, end]).length
+        lat1, lon1 = start[1], start[0]
+        lat2, lon2 = end[1], end[0]
+        length = haversine(lat1, lon1, lat2, lon2)  # Compute distance
         edges.append((start, end, length))
 
 # Convert nodes to a DataFrame
@@ -50,7 +66,7 @@ try:
 
     # Insert nodes
     for _, row in nodes_df.iterrows():
-        cur.execute("INSERT INTO maps_node (id, latitude, longitude) VALUES (%s, %s, %s)", 
+        cur.execute("INSERT INTO maps_node (id, latitude, longitude) VALUES (%s, %s, %s)",
                     (int(row['id']), float(row['latitude']), float(row['longitude'])))
 
     # Insert edges
