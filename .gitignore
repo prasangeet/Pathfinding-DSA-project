@@ -38,3 +38,7 @@ env/
 Thumbs.db
 
 build
+
+# Environment variables and folders
+.env
+venv
