@@ -14,7 +14,7 @@ Before running the TileMap server, ensure you have Docker Desktop installed and 
 To start the TileMap server and serve `.mbtiles` files, use the following command:
 
 ```shell
-docker run --rm -it -v ${PWD}:/data -p 8080:8080 maptiler/tileserver-gl --file /data/jodhpur2.mbtiles
+docker run --rm -it -v ${PWD}:/data -p 8080:8080 maptiler/tileserver-gl --file /data/pune.mbtiles
 ```
 
 ### Explanation:
