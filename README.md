@@ -1,7 +1,7 @@
-# Pathfinding System with Django, Next.js, and C++
+# Pathfinding System with Django, Next.js, and Redis
 
 ## Project Overview
-This project implements a **Shortest Pathfinding System** using **Dijkstra's Algorithm**. The backend is built with **Django**, the frontend with **Next.js**, and the shortest path computation is optimized using **C++**. The project also integrates **OpenStreetMap (OSM)** data for geospatial mapping and visualization.
+This project implements a **Shortest Pathfinding System** using **Dijkstra's Algorithm** and **A***. The backend is built with **Django**, the frontend with **Next.js**, and the shortest path computation is optimized using **Redis caching** for performance. The project also integrates **OpenStreetMap (OSM)** data for geospatial mapping and visualization.
 
 ---
 
@@ -11,17 +11,17 @@ project_root/
 │── backend/            # Django Backend
 │   ├── shortest_path/  # Django Project
 │   │   ├── manage.py       # Django project manager
-│   │   ├── backend/        # Main Django app
-│   │   ├── routes/         # Django routes app
+│   │   ├── shortest_path/        # Main Django app
+│   │   ├── maps/         # Django routes app
 │   │   │   ├── models.py   # Database models
 │   │   │   ├── views.py    # API views
-│   │   ├── dijkstra/       # Compiled C++ module for shortest path computation
 │── frontend/           # Next.js Frontend
 │   ├── components/     # React components
 │   ├── pages/          # Next.js pages
-│── algorithm/          # C++ Dijkstra Algorithm
-│   ├── dijkstra.cpp    # C++ implementation
-│   ├── setup.py        # Pybind11 setup for Python integration
+│   ├── public/         # Static assets
+│   ├── styles/         # Global styles
+│   ├── utils/          # Helper functions
+│   ├── services/       # API calls and integrations
 │── docs/               # Documentation
 │── README.md           # Project documentation
 ```
@@ -29,19 +29,7 @@ project_root/
 ---
 
 ## 🚀 Setting Up the Project
-### 1️⃣ Setting up the **C++ Module**
-The **Dijkstra algorithm** is implemented in C++ and compiled using **CMake**. Follow these steps:
-
-```sh
-cd algorithm
-mkdir build && cd build
-cmake ..
-cmake --build . --config Release
-```
-
----
-
-### 2️⃣ Preparing **Geospatial Data**
+### 1️⃣ Preparing **Geospatial Data**
 #### **Step 1: Download the OSM Data**
 We need to extract a slice of OpenStreetMap (OSM) data for a specific region.
 - Example: **Jodhpur.osm.pbf**
@@ -66,7 +54,7 @@ osmtogeojson jodhpur.osm.pbf > jodhpur.geojson
 
 ---
 
-### 3️⃣ Setting up **Django Backend**
+### 2️⃣ Setting up **Django Backend**
 #### **Step 1: Create a Virtual Environment**
 ```sh
 pip install venv
@@ -91,7 +79,7 @@ pip install --no-deps -r requirements.txt
 
 ---
 
-### 4️⃣ Setting up **PostgreSQL Database**
+### 3️⃣ Setting up **PostgreSQL Database**
 #### **Step 1: Install PostgreSQL**
 Download PostgreSQL from the official site: [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
 
@@ -122,36 +110,84 @@ This will populate the database with geospatial data.
 
 ---
 
-### 5️⃣ Running the **Backend and Frontend**
-#### **Start the Django Backend**
-```sh
-cd backend
-python manage.py runserver
-```
+### 4️⃣ Setting up **Next.js Frontend**
+#### **Step 1: Install Node.js and npm**
+Download and install Node.js from [https://nodejs.org/](https://nodejs.org/).
 
-#### **Start the Next.js Frontend**
+#### **Step 2: Install Dependencies**
 ```sh
 cd frontend
-npm install  # Install dependencies
-npm run dev  # Start development server
+npm install
 ```
+
+#### **Step 3: Set Up Environment Variables**
+Create a `.env.local` file in the `frontend` directory:
+```env
+NEXT_PUBLIC_API_BASE_URL=http://localhost:8000/api
+```
+
+#### **Step 4: Run the Frontend**
+```sh
+npm run dev
+```
+
+The Next.js application will be available at `http://localhost:3000/`.
+
+---
+
+### 5️⃣ Features of the Frontend
+- **Interactive Map:** Displays OpenStreetMap with path visualization.
+- **Shortest Path Calculation:** Users can select two points, and the shortest path is computed and displayed.
+- **Live Updates:** The frontend dynamically fetches routes from the backend API.
+- **Custom Markers:** Start and end points are marked on the map.
+- **Mobile-Friendly UI:** Responsive design for mobile and desktop users.
 
 ---
 
 ## 🔥 Implementing the Shortest Path Algorithm
-### **Approach 1: Using C++ for Performance (Slower Approach)**
-We utilize a **C++ file** to compute the shortest path using Dijkstra’s algorithm:
+### **Using Redis Caching for Performance**
+We use Redis to cache the graph data to improve performance. The graph is loaded from the database and cached automatically.
 
-#### **Step 1: Setup CMake**
-```sh
-cd algorithm
-mkdir build && cd build
-cmake ..
-cmake --build . --config Release
+#### **Steps Implemented for Caching:**
+- **Graph Data Caching:**
+  - The adjacency list representation of the graph is stored in Redis for quick access.
+  - If Redis is down, the data is loaded from the database.
+- **Pathfinding Cache:**
+  - Frequently accessed shortest paths are cached to prevent redundant computations.
+
+#### **How to Use Redis Cache in Django?**
+Since Redis is **open in the cloud**, no setup is needed. We directly integrate it into Django settings.
+
+```python
+# settings.py
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
+        'LOCATION': 'redis://your-redis-instance-url',
+    }
+}
 ```
 
-#### **Step 2: Use Pybind11 for Python Integration**
-A `setup.py` script is included in `algorithm/` to wrap the C++ code as a Python module.
+#### **Loading Graph from Cache**
+```python
+from django.core.cache import cache
+
+def load_graph():
+    cached_graph = cache.get("graph_data")
+    if cached_graph:
+        return cached_graph
+    
+    # Load from database if not cached
+    nodes = Node.objects.all()
+    edges = Edge.objects.all()
+    graph = {node.id: [] for node in nodes}
+    for edge in edges:
+        graph[edge.start_node_id].append((edge.end_node_id, edge.weight))
+        graph[edge.end_node_id].append((edge.start_node_id, edge.weight))
+    
+    cache.set("graph_data", graph)
+    return graph
+```
 
 ---
 
@@ -163,13 +199,12 @@ A `setup.py` script is included in `algorithm/` to wrap the C++ code as a Python
 ---
 
 ## 🛠 Tech Stack
-| Component      | Technology Used      |
-|---------------|----------------------|
-| **Backend**   | Django, Django REST Framework |
-| **Frontend**  | Next.js, React, MapLibre GL JS |
-| **Database**  | PostgreSQL + PostGIS |
-| **Pathfinding** | C++ (Dijkstra’s Algorithm) |
-| **Geospatial Data** | OpenStreetMap (OSM), GeoJSON |
+- **Backend:** Django, Django REST Framework
+- **Frontend:** Next.js, React, MapLibre GL JS
+- **Database:** PostgreSQL + PostGIS
+- **Pathfinding:** Dijkstra’s Algorithm, A*
+- **Geospatial Data:** OpenStreetMap (OSM), GeoJSON
+- **Caching:** Redis
 
 ---
 

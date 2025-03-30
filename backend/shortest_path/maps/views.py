@@ -6,15 +6,22 @@ from django.core.cache import cache
 from .models import Node, Edge
 from django.views.decorators.csrf import csrf_exempt
 
+from django.db import connection
+import json
+
+from django.core.cache import cache
+
 def load_graph():
     """
-    Loads the graph from the database and caches it for performance.
-    Returns an adjacency list representation of the graph.
+    Loads the graph from Django's file-based cache.
+    If not found, fetch from the database and store in cache.
     """
-    cached_graph = cache.get("graph_data")
-    if cached_graph:
-        return cached_graph
+    graph = cache.get("graph_data")
     
+    if graph:
+        return graph  # ✅ Return cached graph if available
+
+    # ❌ Cache miss: Rebuild graph from database
     nodes = Node.objects.all()
     edges = Edge.objects.all()
 
@@ -22,8 +29,10 @@ def load_graph():
     for edge in edges:
         graph[edge.start_node_id].append((edge.end_node_id, edge.weight))
         graph[edge.end_node_id].append((edge.start_node_id, edge.weight))
-    
-    cache.set("graph_data", graph)
+
+    # ✅ Store graph in cache with automatic expiry
+    cache.set("graph_data", graph, timeout=3600)  # Refreshes every 1 hour
+
     return graph
 
 def haversine(lat1, lon1, lat2, lon2):
