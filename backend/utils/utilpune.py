@@ -2,8 +2,18 @@ import fiona
 import psycopg2
 from shapely.geometry import shape, LineString
 
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
 # Database Connection
-conn = psycopg2.connect("dbname=pathfindingdb user=postgres password=ppd12345 host=localhost")
+conn = psycopg2.connect(
+        dbname=os.getenv('DB_NAME'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASSWORD'),
+        host=os.getenv('DB_HOST')
+    )
 cur = conn.cursor()
 
 # Define road types to extract

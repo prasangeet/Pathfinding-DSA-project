@@ -24,7 +24,7 @@ export default function MapComponent() {
       style: {
         version: 8,
         sources: {
-          "jodhpur-source": {
+          "pune-source": {
             type: "raster",
             tiles: [
               "http://localhost:8080/styles/basic-preview/{z}/{x}/{y}.png",
@@ -34,14 +34,18 @@ export default function MapComponent() {
         },
         layers: [
           {
-            id: "jodhpur-layer",
+            id: "pune-layer",
             type: "raster",
-            source: "jodhpur-source",
+            source: "pune-source",
           },
         ],
       },
-      center: [73.02442268444634, 26.29443303635368], // Jodhpur Coordinates
+      center: [73.853, 18.525], // pune Coordinates
       zoom: 16,
+      maxBounds: [
+        [73.603, 18.337],
+        [74.072, 18.771],
+      ],
     });
 
     return () => mapInstance.current.remove();
@@ -192,7 +196,7 @@ export default function MapComponent() {
 
       // Instead of joining points directly, use the coordinates as they come from the API
       // The API should already be returning coordinates that follow the road network
-      
+
       // Wait for the map to be fully loaded
       if (!mapInstance.current.isStyleLoaded()) {
         await new Promise((resolve) => {
