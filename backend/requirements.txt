@@ -8,6 +8,7 @@ psycopg2
 python-dotenv
 pytz
 six
+fiona
 
 packaging
 numpy>=1.22
