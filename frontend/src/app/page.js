@@ -1,213 +1,266 @@
-"use client";
+"use client"
 
-import { useEffect, useRef, useState } from "react";
-import maplibregl from "maplibre-gl";
-import "maplibre-gl/dist/maplibre-gl.css";
-import axios from "axios";
-import { MapIcon, RotateCw } from "lucide-react";
+import { useEffect, useRef, useState } from "react"
+import maplibregl from "maplibre-gl"
+import "maplibre-gl/dist/maplibre-gl.css"
+import axios from "axios"
+import { RotateCw } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Alert, AlertDescription } from "@/components/ui/alert"
+import { LocationPanel } from "@/components/Map/LocationPanel"
+import { SearchPanel } from "@/components/Map/SearchPanel"
 
 export default function MapComponent() {
-  const mapContainer = useRef(null);
-  const mapInstance = useRef(null);
-  const [markers, setMarkers] = useState([]);
-  const [source, setSource] = useState(null);
-  const [destination, setDestination] = useState(null);
-  const [algorithm, setAlgorithm] = useState("dijkstra");
-  const [loading, setLoading] = useState(false);
+  const mapContainer = useRef(null)
+  const mapInstance = useRef(null)
+  const [markers, setMarkers] = useState([])
+  const [source, setSource] = useState(null)
+  const [destination, setDestination] = useState(null)
+  const [algorithm, setAlgorithm] = useState("dijkstra")
+  const [loading, setLoading] = useState(false)
+  const [searchOpen, setSearchOpen] = useState(false)
+  const [sourceSearch, setSourceSearch] = useState("")
+  const [destSearch, setDestSearch] = useState("")
+  const [mapLoaded, setMapLoaded] = useState(false)
+  const [mapError, setMapError] = useState(null)
+  const [routeInfo, setRouteInfo] = useState(null)
 
-  // Initialize map only once
   useEffect(() => {
-    if (!mapContainer.current) return;
-
-    mapInstance.current = new maplibregl.Map({
-      container: mapContainer.current,
-      style: {
-        version: 8,
-        sources: {
-          "pune-source": {
-            type: "raster",
-            tiles: [
-              "http://localhost:8080/styles/basic-preview/{z}/{x}/{y}.png",
-            ],
-            tileSize: 256,
-          },
-        },
-        layers: [
-          {
-            id: "pune-layer",
-            type: "raster",
-            source: "pune-source",
-          },
-        ],
-      },
-      center: [73.853, 18.525], // pune Coordinates
-      zoom: 16,
-      maxBounds: [
-        [73.603, 18.337],
-        [74.072, 18.771],
-      ],
-    });
-
-    return () => mapInstance.current.remove();
-  }, []);
-
-  // Set up click handler with awareness of source and destination state
-  useEffect(() => {
-    if (!mapInstance.current) return;
-
-    const handleMapClick = (e) => {
-      const { lng, lat } = e.lngLat;
-      console.log({ lng, lat });
-
-      if (!source) {
-        // Clear previous markers if restarting
-        markers.forEach((marker) => marker.remove());
-        setMarkers([]);
-
-        setSource({ lng, lat });
-
-        // Add marker for source
-        const sourceMarker = new maplibregl.Marker({ color: "green" })
-          .setLngLat([lng, lat])
-          .addTo(mapInstance.current);
-
-        setMarkers([sourceMarker]);
-      } else if (!destination) {
-        setDestination({ lng, lat });
-
-        // Add marker for destination
-        const destinationMarker = new maplibregl.Marker({ color: "red" })
-          .setLngLat([lng, lat])
-          .addTo(mapInstance.current);
-
-        setMarkers((prevMarkers) => [...prevMarkers, destinationMarker]);
-      }
-    };
-
-    // Add click event listener
-    mapInstance.current.on("click", handleMapClick);
-
-    // Clean up the event listener when component unmounts or source/destination change
-    return () => {
-      if (mapInstance.current) {
-        mapInstance.current.off("click", handleMapClick);
-      }
-    };
-  }, [source, destination, markers]);
-
-  // Clear the route when source or destination changes
-  useEffect(() => {
-    if (source === null || destination === null) {
-      clearRoute();
-    }
-  }, [source, destination]);
-
-  // Helper function to safely clear the route
-  const clearRoute = () => {
-    if (!mapInstance.current) return;
+    if (!mapContainer.current || mapInstance.current) return
 
     try {
-      // Remove layers first, then sources
-      if (mapInstance.current.getLayer("route-outline")) {
-        mapInstance.current.removeLayer("route-outline");
-      }
-      if (mapInstance.current.getLayer("route")) {
-        mapInstance.current.removeLayer("route");
-      }
-      if (mapInstance.current.getSource("route")) {
-        mapInstance.current.removeSource("route");
+      const map = new maplibregl.Map({
+        container: mapContainer.current,
+        style: {
+          version: 8,
+          sources: {
+            osm: {
+              type: "raster",
+              tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+              tileSize: 256,
+              attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            },
+          },
+          layers: [
+            {
+              id: "osm-layer",
+              type: "raster",
+              source: "osm",
+              minzoom: 0,
+              maxzoom: 19,
+            },
+          ],
+        },
+        center: [73.853, 18.525],
+        zoom: 13,
+        maxBounds: [
+          [73.603, 18.337],
+          [74.072, 18.771],
+        ],
+      })
+
+      map.on("load", () => {
+        setMapLoaded(true)
+        console.log("Map loaded successfully")
+      })
+
+      map.on("error", (e) => {
+        console.error("MapLibre GL Error:", e)
+        setMapError(`Map Error: ${e.error?.message || "Unknown error"}`)
+      })
+
+      mapInstance.current = map
+
+      return () => {
+        if (mapInstance.current) {
+          mapInstance.current.remove()
+          mapInstance.current = null
+        }
       }
     } catch (err) {
-      console.error("Error clearing route:", err);
+      console.error("Map initialization error:", err)
+      setMapError(`Failed to initialize map: ${err.message}`)
     }
-  };
+  }, [])
 
-  const resetPoints = () => {
-    // Remove all markers
-    markers.forEach((marker) => marker.remove());
-    setMarkers([]);
+  useEffect(() => {
+    if (!mapInstance.current || !mapLoaded) return
 
-    // Clear source and destination
-    setSource(null);
-    setDestination(null);
+    const handleMapClick = (e) => {
+      const { lng, lat } = e.lngLat
+      console.log("Map clicked at:", lng, lat)
 
-    // Clear the route
-    clearRoute();
-  };
+      if (!source) {
+        markers.forEach((marker) => marker.remove())
+        setMarkers([])
+        setSource({ lng, lat })
 
-  const fetchShortestPath = async () => {
-    if (!source || !destination) {
-      alert("Please select both source and destination points.");
-      return;
+        const sourceMarker = new maplibregl.Marker({ color: "#22c55e" })
+          .setLngLat([lng, lat])
+          .addTo(mapInstance.current)
+
+        setMarkers([sourceMarker])
+      } else if (!destination) {
+        setDestination({ lng, lat })
+
+        const destinationMarker = new maplibregl.Marker({ color: "#ef4444" })
+          .setLngLat([lng, lat])
+          .addTo(mapInstance.current)
+
+        setMarkers((prevMarkers) => [...prevMarkers, destinationMarker])
+      }
     }
 
-    setLoading(true);
+    mapInstance.current.on("click", handleMapClick)
+
+    return () => {
+      if (mapInstance.current) {
+        mapInstance.current.off("click", handleMapClick)
+      }
+    }
+  }, [source, destination, markers, mapLoaded])
+
+  useEffect(() => {
+    if (source === null || destination === null) {
+      clearRoute()
+      setRouteInfo(null)
+    }
+  }, [source, destination])
+
+  const clearRoute = () => {
+    if (!mapInstance.current || !mapLoaded) return
 
     try {
-      console.log("Sending request with:", { source, destination, algorithm });
-
-      const response = await axios.get(
-        `http://localhost:8000/api/${algorithm}/`,
-        {
-          params: {
-            start_lat: source.lat,
-            start_lon: source.lng,
-            end_lat: destination.lat,
-            end_lon: destination.lng,
-          },
+      const layers = ["route-outline", "route"]
+      layers.forEach(layer => {
+        if (mapInstance.current.getLayer(layer)) {
+          mapInstance.current.removeLayer(layer)
         }
-      );
+      })
+      
+      if (mapInstance.current.getSource("route")) {
+        mapInstance.current.removeSource("route")
+      }
+    } catch (err) {
+      console.error("Error clearing route:", err)
+    }
+  }
 
-      console.log("Response received:", response.data);
+  const resetPoints = () => {
+    markers.forEach((marker) => marker.remove())
+    setMarkers([])
+    setSource(null)
+    setDestination(null)
+    setSourceSearch("")
+    setDestSearch("")
+    setRouteInfo(null)
+    clearRoute()
+  }
 
-      const pathData = response.data.path; // Expecting an array of coordinates
+  const handleLocationSelect = (coords, isSource) => {
+    if (!mapInstance.current || !mapLoaded) return
+
+    if (isSource) {
+      markers.forEach((marker) => marker.remove())
+      setMarkers([])
+      setSource({ lng: coords[0], lat: coords[1] })
+
+      const sourceMarker = new maplibregl.Marker({ color: "#22c55e" }).setLngLat(coords).addTo(mapInstance.current)
+
+      setMarkers([sourceMarker])
+    } else {
+      setDestination({ lng: coords[0], lat: coords[1] })
+
+      const destMarker = new maplibregl.Marker({ color: "#ef4444" }).setLngLat(coords).addTo(mapInstance.current)
+
+      setMarkers((prev) => [...prev, destMarker])
+    }
+
+    mapInstance.current.flyTo({
+      center: coords,
+      zoom: 16,
+      essential: true,
+    })
+  }
+
+  const calculateRouteInfo = (coordinates) => {
+    const R = 6371
+    let totalDistance = 0
+    
+    for (let i = 0; i < coordinates.length - 1; i++) {
+      const [lon1, lat1] = coordinates[i]
+      const [lon2, lat2] = coordinates[i + 1]
+      
+      const dLat = (lat2 - lat1) * Math.PI / 180
+      const dLon = (lon2 - lon1) * Math.PI / 180
+      
+      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                Math.sin(dLon/2) * Math.sin(dLon/2)
+      
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+      totalDistance += R * c
+    }
+
+    const speedCar = 30
+    const speedBike = 15
+    const speedFoot = 5
+
+    return {
+      distance: totalDistance,
+      timeByCar: Math.round(totalDistance / speedCar * 60),
+      timeByBike: Math.round(totalDistance / speedBike * 60),
+      timeByFoot: Math.round(totalDistance / speedFoot * 60)
+    }
+  }
+
+  const fetchShortestPath = async () => {
+    if (!source || !destination || !mapInstance.current || !mapLoaded) {
+      alert("Please select both source and destination points.")
+      return
+    }
+
+    setLoading(true)
+
+    try {
+      const response = await axios.get(`http://localhost:8000/api/${algorithm}/`, {
+        params: {
+          start_lat: source.lat,
+          start_lon: source.lng,
+          end_lat: destination.lat,
+          end_lon: destination.lng,
+        },
+      })
+
+      const pathData = response.data.path
 
       if (!Array.isArray(pathData) || pathData.length === 0) {
-        alert("No valid path found.");
-        setLoading(false);
-        return;
+        alert("No valid path found.")
+        setLoading(false)
+        return
       }
 
-      // ✅ Standardize coordinate format to [longitude, latitude]
-      let coordinates = pathData
+      const coordinates = pathData
         .map((point) => {
           if (Array.isArray(point) && point.length === 2) {
-            // Already in [lon, lat] format
-            return [Number(point[0]), Number(point[1])];
+            return [Number(point[0]), Number(point[1])]
           } else if (point && typeof point === "object") {
-            // Handle object format { lat, lon } or { lat, lng }
-            const lon = point.lon ?? point.lng ?? null;
-            const lat = point.lat ?? null;
-            return lon !== null && lat !== null
-              ? [Number(lon), Number(lat)]
-              : null;
+            const lon = point.lon ?? point.lng ?? null
+            const lat = point.lat ?? null
+            return lon !== null && lat !== null ? [Number(lon), Number(lat)] : null
           }
-          return null;
+          return null
         })
-        .filter(Boolean); // Remove any null values
-
-      console.log("Processed coordinates:", coordinates);
+        .filter(Boolean)
 
       if (coordinates.length < 2) {
-        alert("Error: Not enough valid coordinates to draw a path");
-        setLoading(false);
-        return;
+        alert("Error: Not enough valid coordinates to draw a path")
+        setLoading(false)
+        return
       }
 
-      // Instead of joining points directly, use the coordinates as they come from the API
-      // The API should already be returning coordinates that follow the road network
+      clearRoute()
 
-      // Wait for the map to be fully loaded
-      if (!mapInstance.current.isStyleLoaded()) {
-        await new Promise((resolve) => {
-          mapInstance.current.once("styledata", resolve);
-        });
-      }
-
-      // Clear any existing route
-      clearRoute();
-
-      // Create a GeoJSON object with the route
       const routeData = {
         type: "Feature",
         properties: {},
@@ -215,18 +268,14 @@ export default function MapComponent() {
           type: "LineString",
           coordinates: coordinates,
         },
-      };
+      }
 
-      console.log("Adding route with data:", routeData);
-
-      // Add new route source
       try {
         mapInstance.current.addSource("route", {
           type: "geojson",
           data: routeData,
-        });
+        })
 
-        // Add route layers
         mapInstance.current.addLayer({
           id: "route-outline",
           type: "line",
@@ -240,7 +289,7 @@ export default function MapComponent() {
             "line-width": 8,
             "line-opacity": 0.7,
           },
-        });
+        })
 
         mapInstance.current.addLayer({
           id: "route",
@@ -251,118 +300,104 @@ export default function MapComponent() {
             "line-cap": "round",
           },
           paint: {
-            "line-color": "#FF0000",
+            "line-color": "#3b82f6",
             "line-width": 4,
             "line-opacity": 1,
           },
-        });
+        })
 
-        console.log("Route layers added successfully");
+        setRouteInfo(calculateRouteInfo(coordinates))
       } catch (err) {
-        console.error("Error adding route layers:", err);
-        alert("Error rendering the route. See console for details.");
+        console.error("Error adding route layers:", err)
+        alert("Error rendering the route. See console for details.")
       }
 
-      // Fit the map to the path bounds
-      const bounds = new maplibregl.LngLatBounds();
-      coordinates.forEach((coord) => bounds.extend(coord));
+      const bounds = new maplibregl.LngLatBounds()
+      coordinates.forEach((coord) => bounds.extend(coord))
 
       mapInstance.current.fitBounds(bounds, {
         padding: 50,
         maxZoom: 17,
-      });
+      })
 
-      // Force map update
-      mapInstance.current.triggerRepaint();
+      mapInstance.current.triggerRepaint()
     } catch (error) {
-      console.error("Error fetching path:", error);
-      console.error(
-        "Error details:",
-        error.response ? error.response.data : "No response data"
-      );
-      alert("Error fetching shortest path. Check the console for details.");
+      console.error("Error fetching path:", error)
+      alert("Error fetching shortest path. Check the console for details.")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  };
+  }
 
   return (
-    <div className="flex flex-col h-screen">
-      {/* Control Panel */}
-      <div className="bg-white shadow-md p-4 mb-2 flex flex-wrap items-center gap-4 w-full">
-        <div className="flex items-center">
-          <label className="text-sm font-medium mr-2">Algorithm:</label>
-          <select
-            className="p-2 border rounded-md bg-gray-50 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-            value={algorithm}
-            onChange={(e) => setAlgorithm(e.target.value)}
-          >
-            <option value="dijkstra">Dijkstra</option>
-            <option value="astar">A*</option>
-          </select>
-        </div>
+    <div className="relative h-screen w-full">
+      <div ref={mapContainer} className="h-full w-full" />
 
-        <button
-          className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
-          onClick={fetchShortestPath}
-          disabled={!source || !destination || loading}
-        >
-          {loading ? (
-            <>
-              <RotateCw className="w-4 h-4 animate-spin" />
-              Processing...
-            </>
-          ) : (
-            <>
-              <MapIcon className="w-4 h-4" />
-              Find Shortest Path
-            </>
-          )}
-        </button>
+      <SearchPanel
+        sourceSearch={sourceSearch}
+        setSourceSearch={setSourceSearch}
+        destSearch={destSearch}
+        setDestSearch={setDestSearch}
+        source={source}
+        setSource={setSource}
+        destination={destination}
+        setDestination={setDestination}
+        markers={markers}
+        setMarkers={setMarkers}
+        algorithm={algorithm}
+        setAlgorithm={setAlgorithm}
+        loading={loading}
+        fetchShortestPath={fetchShortestPath}
+        routeInfo={routeInfo}
+      />
 
-        <button
-          className="bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-700 transition-colors"
-          onClick={resetPoints}
-        >
-          Reset Points
-        </button>
+      <LocationPanel
+        searchOpen={searchOpen}
+        setSearchOpen={setSearchOpen}
+        handleLocationSelect={handleLocationSelect}
+        setSourceSearch={setSourceSearch}
+        setDestSearch={setDestSearch}
+      />
 
-        <div className="flex-grow"></div>
+      <Button variant="secondary" className="absolute bottom-4 right-4 shadow-lg z-10" onClick={resetPoints}>
+        Reset Points
+      </Button>
 
-        <div className="text-sm flex flex-col sm:flex-row sm:gap-4">
-          <div className="flex items-center gap-2">
-            <div
-              className={`w-3 h-3 rounded-full ${
-                source ? "bg-green-500" : "bg-gray-300"
-              }`}
-            ></div>
-            <span>{source ? "Source: Selected" : "Source: Click on map"}</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div
-              className={`w-3 h-3 rounded-full ${
-                destination ? "bg-red-500" : "bg-gray-300"
-              }`}
-            ></div>
-            <span>
-              {destination ? "Destination: Selected" : "Destination: Not set"}
-            </span>
-          </div>
-        </div>
-      </div>
-
-      {/* Instructions */}
       {!source && !destination && (
-        <div className="bg-blue-50 text-blue-800 p-3 mb-2 rounded-md mx-4">
-          <p>
-            Click on the map to set your source point first, then click again to
-            set your destination.
-          </p>
+        <Alert className="absolute bottom-4 left-4 right-20 max-w-md z-10">
+          <AlertDescription>
+            Click on the map to set your source point first, then click again to set your destination, or use the search
+            panel above.
+          </AlertDescription>
+        </Alert>
+      )}
+
+      {!mapLoaded && (
+        <div className="absolute inset-0 flex items-center justify-center z-20">
+          <div className="text-center">
+            <RotateCw className="w-8 h-8 animate-spin mx-auto text-blue-500 mb-2" />
+            <p className="text-gray-700">Loading map...</p>
+          </div>
         </div>
       )}
 
-      {/* Map */}
-      <div ref={mapContainer} className="flex-grow w-full" />
+      {mapError && (
+        <Alert className="absolute top-20 left-4 right-4 max-w-md mx-auto z-20 bg-red-50 border-red-200">
+          <AlertDescription className="text-red-800">
+            {mapError}
+            <div className="mt-2">
+              <Button 
+                variant="outline" 
+                size="sm" 
+                className="border-red-300 text-red-800"
+                onClick={() => window.location.reload()}
+              >
+                Reload Page
+              </Button>
+            </div>
+          </AlertDescription>
+        </Alert>
+      )}
     </div>
-  );
+  )
 }
