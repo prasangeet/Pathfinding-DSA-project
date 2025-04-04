@@ -132,12 +132,12 @@ export default function MapComponent() {
 
     try {
       const layers = ["route-outline", "route"]
-      layers.forEach(layer => {
+      layers.forEach((layer) => {
         if (mapInstance.current.getLayer(layer)) {
           mapInstance.current.removeLayer(layer)
         }
       })
-      
+
       if (mapInstance.current.getSource("route")) {
         mapInstance.current.removeSource("route")
       }
@@ -186,19 +186,19 @@ export default function MapComponent() {
   const calculateRouteInfo = (coordinates) => {
     const R = 6371
     let totalDistance = 0
-    
+
     for (let i = 0; i < coordinates.length - 1; i++) {
       const [lon1, lat1] = coordinates[i]
       const [lon2, lat2] = coordinates[i + 1]
-      
-      const dLat = (lat2 - lat1) * Math.PI / 180
-      const dLon = (lon2 - lon1) * Math.PI / 180
-      
-      const a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-                Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
-                Math.sin(dLon/2) * Math.sin(dLon/2)
-      
-      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a))
+
+      const dLat = ((lat2 - lat1) * Math.PI) / 180
+      const dLon = ((lon2 - lon1) * Math.PI) / 180
+
+      const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos((lat1 * Math.PI) / 180) * Math.cos((lat2 * Math.PI) / 180) * Math.sin(dLon / 2) * Math.sin(dLon / 2)
+
+      const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
       totalDistance += R * c
     }
 
@@ -208,9 +208,9 @@ export default function MapComponent() {
 
     return {
       distance: totalDistance,
-      timeByCar: Math.round(totalDistance / speedCar * 60),
-      timeByBike: Math.round(totalDistance / speedBike * 60),
-      timeByFoot: Math.round(totalDistance / speedFoot * 60)
+      timeByCar: Math.round((totalDistance / speedCar) * 60),
+      timeByBike: Math.round((totalDistance / speedBike) * 60),
+      timeByFoot: Math.round((totalDistance / speedFoot) * 60),
     }
   }
 
@@ -261,19 +261,20 @@ export default function MapComponent() {
 
       clearRoute()
 
-      const routeData = {
+      // Create an initial empty LineString
+      const initialRouteData = {
         type: "Feature",
         properties: {},
         geometry: {
           type: "LineString",
-          coordinates: coordinates,
+          coordinates: [coordinates[0]],
         },
       }
 
       try {
         mapInstance.current.addSource("route", {
           type: "geojson",
-          data: routeData,
+          data: initialRouteData,
         })
 
         mapInstance.current.addLayer({
@@ -306,25 +307,55 @@ export default function MapComponent() {
           },
         })
 
-        setRouteInfo(calculateRouteInfo(coordinates))
+        // Animate the route drawing
+        let step = 0
+        const numSteps = coordinates.length
+        const animationDuration = 1500 // ms
+        const stepDuration = animationDuration / numSteps
+
+        const bounds = new maplibregl.LngLatBounds()
+        coordinates.forEach((coord) => bounds.extend(coord))
+
+        mapInstance.current.fitBounds(bounds, {
+          padding: 50,
+          maxZoom: 17,
+        })
+
+        const animateRoute = () => {
+          if (step < numSteps) {
+            // Add the next coordinate to the route
+            const animatedRoute = {
+              type: "Feature",
+              properties: {},
+              geometry: {
+                type: "LineString",
+                coordinates: coordinates.slice(0, step + 1),
+              },
+            }
+
+            if (mapInstance.current.getSource("route")) {
+              mapInstance.current.getSource("route").setData(animatedRoute)
+            }
+
+            step++
+            setTimeout(animateRoute, stepDuration)
+          } else {
+            // Animation complete, set route info
+            setRouteInfo(calculateRouteInfo(coordinates))
+            setLoading(false)
+          }
+        }
+
+        // Start the animation
+        animateRoute()
       } catch (err) {
         console.error("Error adding route layers:", err)
         alert("Error rendering the route. See console for details.")
+        setLoading(false)
       }
-
-      const bounds = new maplibregl.LngLatBounds()
-      coordinates.forEach((coord) => bounds.extend(coord))
-
-      mapInstance.current.fitBounds(bounds, {
-        padding: 50,
-        maxZoom: 17,
-      })
-
-      mapInstance.current.triggerRepaint()
     } catch (error) {
       console.error("Error fetching path:", error)
       alert("Error fetching shortest path. Check the console for details.")
-    } finally {
       setLoading(false)
     }
   }
@@ -349,6 +380,7 @@ export default function MapComponent() {
         loading={loading}
         fetchShortestPath={fetchShortestPath}
         routeInfo={routeInfo}
+        mapInstance={mapInstance}
       />
 
       <LocationPanel
@@ -386,9 +418,9 @@ export default function MapComponent() {
           <AlertDescription className="text-red-800">
             {mapError}
             <div className="mt-2">
-              <Button 
-                variant="outline" 
-                size="sm" 
+              <Button
+                variant="outline"
+                size="sm"
                 className="border-red-300 text-red-800"
                 onClick={() => window.location.reload()}
               >
