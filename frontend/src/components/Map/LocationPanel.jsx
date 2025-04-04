@@ -28,7 +28,12 @@ export const commonLocations = [
   { name: "Pune Airport", coords: [73.913, 18.582], icon: Plane },
   { name: "Hinjewadi IT Park", coords: [73.738, 18.589], icon: Building },
   { name: "Aga Khan Palace", coords: [73.904, 18.547], icon: Building },
-]
+  { name: "Sinhagad Fort", coords: [73.771, 18.366], icon: Landmark }, // Historical fort
+  { name: "Okayama Friendship Garden", coords: [73.815, 18.508], icon: TreePine }, // Japanese-style garden
+  { name: "Pataleshwar Cave Temple", coords: [73.847, 18.530], icon: Landmark }, // Ancient rock-cut temple
+  { name: "Rajiv Gandhi Zoological Park", coords: [73.853, 18.467], icon: TreePine }, // Wildlife park
+  { name: "Darshan Museum", coords: [73.879, 18.518], icon: Building }, // Spiritual museum
+];
 
 export function LocationPanel({ searchOpen, setSearchOpen, handleLocationSelect, setSourceSearch, setDestSearch }) {
   return (
@@ -40,7 +45,7 @@ export function LocationPanel({ searchOpen, setSearchOpen, handleLocationSelect,
           <ChevronRight className="w-4 h-4 ml-1 sm:ml-2" />
         </Button>
       </SheetTrigger>
-      <SheetContent className="w-full sm:w-[400px] md:w-[540px] bg-white overflow-hidden flex flex-col h-full">
+      <SheetContent className="w-full sm:w-[400px] md:w-[540px] bg-white overflow-hidden flex flex-col h-full p-5">
         <SheetHeader className="pb-4">
           <SheetTitle className="text-2xl font-bold text-gray-800">Popular Destinations</SheetTitle>
         </SheetHeader>
