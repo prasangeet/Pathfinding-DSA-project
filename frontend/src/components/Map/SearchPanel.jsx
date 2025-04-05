@@ -260,7 +260,7 @@ export function SearchPanel({
                     <div className="flex flex-col items-center sm:items-start sm:flex-row sm:gap-2">
                       <PersonStanding className="w-5 h-5 text-blue-700" />
                       <div>
-                        <p className="font-medium">On Foot</p>
+                        <p className="font-medium">By Foot</p>
                         <p>{routeInfo.timeByFoot} min</p>
                       </div>
                     </div>
