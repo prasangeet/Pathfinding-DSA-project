@@ -1,3 +1,1078 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:a842bf02a1524ab526f48ff496750cdc9be4b8ebac2e327cf545d3cc0d371c18
-size 41990
+{
+  "type": "FeatureCollection",
+  "name": "points",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "355025171",
+        "name": "City Wall",
+        "other_tags": "\"historic\"=>\"ruins\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0219991, 26.2880849] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "1997275923",
+        "name": "Heaven Guest House",
+        "other_tags": "\"phone\"=>\"91 2912639283\",\"tourism\"=>\"guest_house\",\"website\"=>\"www.heavenguesthousenisha.com\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0214453, 26.2954253] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2001309130",
+        "name": "Blue House",
+        "other_tags": "\"internet_access\"=>\"wlan\",\"name:ur\"=>\"بلیو ہاؤس\",\"phone\"=>\"912912621396\",\"tourism\"=>\"guest_house\",\"website\"=>\"https://www.bluehousejodhpur.com/\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0210161, 26.2927321] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2008637322",
+        "name": "Hotel Shivam",
+        "other_tags": "\"internet_access\"=>\"wlan\",\"internet_access:fee\"=>\"no\",\"tourism\"=>\"hotel\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0227387, 26.2962429] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2147704538",
+        "name": "Kumbhat Mitesh",
+        "other_tags": "\"addr:street\"=>\"Kazi Wada, Moti Chowk\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0207884, 26.2916702] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2377236245",
+        "name": "Gopal",
+        "other_tags": "\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0223691, 26.2965844] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2377236247",
+        "name": "Sunrise",
+        "other_tags": "\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0225539, 26.2966949] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2410174123",
+        "name": "Jharoka Restaurant",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"indian\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0229599, 26.2968832] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2575600312",
+        "name": "Mishrilal Sweets and Lassi",
+        "other_tags": "\"description\"=>\"also has blankets etc.\",\"phone\"=>\"+912912540036\",\"shop\"=>\"bag\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.024423, 26.2943992] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2592750122",
+        "name": "Mohanlal Verhomal",
+        "other_tags": "\"addr:city\"=>\"Jodhpur\",\"addr:housenumber\"=>\"209 B\",\"addr:street\"=>\"Vegetable Market\",\"shop\"=>\"convenience\",\"website\"=>\"https://www.mvspices.com/\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0232584, 26.2953603] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2592750324",
+        "name": "Jhankar",
+        "other_tags": "\"amenity\"=>\"restaurant\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0225174, 26.2965755] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2595261572",
+        "name": "Sheesh Mahal",
+        "other_tags": "\"amenity\"=>\"cafe\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0240979, 26.2962017] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2595261573",
+        "name": "Indique",
+        "other_tags": "\"amenity\"=>\"restaurant\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0240235, 26.2964113] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2688046087",
+        "name": "गुलाब सागर यहाँ से देखें",
+        "other_tags": "\"name:en\"=>\"Gulab Sagar viewpoint\",\"tourism\"=>\"viewpoint\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0240767, 26.2968396] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2803462738",
+        "name": "Haveli Inn Pal",
+        "other_tags": "\"email\"=>\"info@haveliinnpal.com\",\"internet_access\"=>\"wlan\",\"internet_access:fee\"=>\"no\",\"phone\"=>\"+91-9828077510\",\"tourism\"=>\"hotel\",\"website\"=>\"https://haveliinnpal.com/index.php\",\"wheelchair\"=>\"no\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0239782, 26.296515] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "2935011684",
+        "name": "Umaid Heritage Art School",
+        "other_tags": "\"addr:city\"=>\"Jodhpur\",\"addr:housenumber\"=>\"153\",\"addr:postcode\"=>\"342001\",\"addr:street\"=>\"Sumer Market,Inside Dhaan Mandi,,Near Ckock Tower,\",\"artist_name\"=>\"Vijay Prajapat Gaurav Solanki\",\"artwork_type\"=>\"painting_graphite_sketches_miniature\",\"artwork_type_1\"=>\"traditional\",\"phone\"=>\"=91-9828404827\",\"tourism\"=>\"artwork\",\"website\"=>\"http://www.umaidheritageartschool.com\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0223449, 26.2949577] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3209386500",
+        "name": "Hotel Sarvar",
+        "other_tags": "\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0213167, 26.2957111] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3476095719",
+        "name": "Mishrilala Sweets and Lassi",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"regional\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0245241, 26.2944201] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3476098655",
+        "name": "Kunj Bihari Ji Temple",
+        "other_tags": "\"addr:city\"=>\"Jodhpur\",\"addr:postcode\"=>\"342002\",\"addr:street\"=>\"Katla Chowk, Katla Bazar\",\"amenity\"=>\"place_of_worship\",\"name:hi\"=>\"जय श्री कुंज बिहारी सा\",\"religion\"=>\"hindu\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.019878, 26.2934386] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3476130395",
+        "name": "Shahi Samosa",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"regional\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0242029, 26.2937794] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3800534710",
+        "name": "Lakhara Bazaar",
+        "other_tags": "\"amenity\"=>\"marketplace\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0201684, 26.294843] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3802059363",
+        "name": "Baba Art Emporium",
+        "other_tags": "\"building\"=>\"retail\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0231033, 26.2955815] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3802084920",
+        "name": "Sardar market",
+        "other_tags": "\"amenity\"=>\"marketplace\",\"tourism\"=>\"attraction\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0238553, 26.2948104] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3802084921",
+        "other_tags": "\"shop\"=>\"convenience\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0232517, 26.2950899] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3902482135",
+        "name": "Mohanlal Verhomal (MV) Spices",
+        "other_tags": "\"addr:housenumber\"=>\"209-B\",\"addr:street\"=>\"Sardar Market\",\"amenity\"=>\"marketplace\",\"description\"=>\"Original shop of MV Spices, a Manufacturer of all kind of spices run by women\",\"phone\"=>\"+919314951961\",\"website\"=>\"https://www.mvspices.com/\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.02329, 26.2952242] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "3906004482",
+        "name": "Sambhali Boutique",
+        "other_tags": "\"shop\"=>\"gift\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0219931, 26.2971525] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4040274119",
+        "name": "Nirvana restaurant",
+        "other_tags": "\"amenity\"=>\"restaurant\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0226044, 26.2940055] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4045582751",
+        "name": "King of Omelettes",
+        "other_tags": "\"amenity\"=>\"fast_food\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0236207, 26.295825] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4285894690",
+        "name": "Hotel Haveli",
+        "other_tags": "\"addr:street\"=>\"Makrana Mohalla\",\"email\"=>\"havelijodhpur@gmail.com\",\"internet_access\"=>\"wlan\",\"phone\"=>\"+91-9414295539\",\"tourism\"=>\"hotel\",\"website\"=>\"https://www.hotelhaveli.net/\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.02293, 26.297242] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4500039091",
+        "name": "Café Royale",
+        "other_tags": "\"amenity\"=>\"cafe\",\"cuisine\"=>\"coffee_shop;tea;sandwich;indian;pancake;breakfast\",\"internet_access\"=>\"wlan\",\"name:ur\"=>\"کیفے رائل\",\"opening_hours\"=>\"Mo-Su 09:00-21:00\",\"phone\"=>\"7726823777\",\"website\"=>\"https://www.facebook.com/caferoyaleclocktower\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0240593, 26.2953602] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4546283392",
+        "name": "IDBI bank",
+        "other_tags": "\"amenity\"=>\"atm\",\"brand\"=>\"IDBI Bank\",\"brand:wikidata\"=>\"Q3633485\",\"operator\"=>\"IDBI Bank\",\"operator:wikidata\"=>\"Q3633485\",\"short_name\"=>\"IDBI\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0244609, 26.292702] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4546327889",
+        "name": "आरोड़ा चाट भण्डार",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"indian\",\"name:ur\"=>\"اروڑا چاٹ بھنڈر\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0241558, 26.2936959] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4546327890",
+        "other_tags": "\"amenity\"=>\"atm\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0248783, 26.2925256] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4546330289",
+        "other_tags": "\"shop\"=>\"confectionery\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0230446, 26.293155] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4547414390",
+        "name": "HDFC",
+        "other_tags": "\"amenity\"=>\"atm\",\"brand\"=>\"HDFC Bank\",\"brand:en\"=>\"HDFC Bank\",\"brand:wikidata\"=>\"Q631047\",\"currency:INR\"=>\"yes\",\"drive_through\"=>\"no\",\"indoor\"=>\"yes\",\"opening_hours\"=>\"24/7\",\"operator\"=>\"HDFC Bank\",\"operator:en\"=>\"HDFC Bank\",\"operator:wikidata\"=>\"Q631047\",\"short_name\"=>\"HDFC\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0247878, 26.2928743] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4547437890",
+        "name": "Punjab National Bank",
+        "other_tags": "\"amenity\"=>\"atm\",\"brand\"=>\"Punjab National Bank\",\"brand:wikidata\"=>\"Q2743499\",\"operator\"=>\"Punjab National Bank\",\"operator:wikidata\"=>\"Q2743499\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0247641, 26.2929953] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4547468089",
+        "name": "Axis Bank ATM",
+        "other_tags": "\"amenity\"=>\"atm\",\"brand\"=>\"Axis Bank\",\"brand:wikidata\"=>\"Q2003549\",\"drive_through\"=>\"no\",\"operator\"=>\"Axis Bank\",\"operator:wikidata\"=>\"Q2003549\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0225777, 26.2966279] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4547492290",
+        "name": "State Bank of India",
+        "other_tags": "\"amenity\"=>\"atm\",\"brand\"=>\"State Bank of India\",\"brand:en\"=>\"State Bank of India\",\"brand:ur\"=>\"اسٹیٹ بینک آف انڈیا\",\"brand:wikidata\"=>\"Q1340361\",\"currency:INR\"=>\"yes\",\"drive_through\"=>\"no\",\"indoor\"=>\"yes\",\"name:ur\"=>\"اسٹیٹ بینک آف انڈیا\",\"opening_hours\"=>\"24/7\",\"operator\"=>\"State Bank of India\",\"operator:en\"=>\"State Bank of India\",\"operator:ur\"=>\"اسٹیٹ بینک آف انڈیا\",\"operator:wikidata\"=>\"Q1340361\",\"short_name\"=>\"SBI\",\"short_name:ur\"=>\"ایس بی آئی\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0250401, 26.2919039] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4547500190",
+        "other_tags": "\"amenity\"=>\"atm\",\"brand\"=>\"State Bank of India\",\"brand:en\"=>\"State Bank of India\",\"brand:wikidata\"=>\"Q1340361\",\"currency:INR\"=>\"yes\",\"drive_through\"=>\"no\",\"indoor\"=>\"yes\",\"opening_hours\"=>\"24/7\",\"operator\"=>\"State Bank of India\",\"operator:en\"=>\"State Bank of India\",\"operator:wikidata\"=>\"Q1340361\",\"short_name\"=>\"SBI\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.025274, 26.2909467] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4547501389",
+        "name": "janta restraunt",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"indian\",\"name:en\"=>\"Janta Restaurant\",\"name:hi\"=>\"जगता रेस्टोरेंट\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0246011, 26.2936026] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4548886990",
+        "other_tags": "\"amenity\"=>\"cafe\",\"cuisine\"=>\"indian;tea;coffee_shop\",\"internet_access\"=>\"no\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0229968, 26.2938207] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4551731591",
+        "other_tags": "\"amenity\"=>\"atm\",\"brand\"=>\"Oriental Bank of Commerce\",\"brand:wikidata\"=>\"Q367008\",\"operator\"=>\"Oriental Bank of Commerce\",\"operator:wikidata\"=>\"Q367008\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0254172, 26.2903796] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4552274793",
+        "name": "Best Chai",
+        "other_tags": "\"addr:street\"=>\"Nai Sarak\",\"addr:street:ur\"=>\"نئی سرک\",\"amenity\"=>\"cafe\",\"cuisine\"=>\"tea\",\"name:hi\"=>\"धाकड़ चाय\",\"name:ur\"=>\"دھکاد چائے\",\"smoking\"=>\"separated\",\"wheelchair\"=>\"yes\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0239938, 26.2938721] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4552561289",
+        "other_tags": "\"amenity\"=>\"place_of_worship\",\"name:en\"=>\"Hindu Temple\",\"religion\"=>\"hindu\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0222207, 26.29627] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4623807295",
+        "other_tags": "\"amenity\"=>\"fast_food\",\"name:en\"=>\"Omelette Shop (Garib Hotel)\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0239811, 26.2958961] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4643097493",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"internet_access\"=>\"wlan\",\"name:en\"=>\"The Curry's\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0226806, 26.2968375] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4685592589",
+        "other_tags": "\"name:en\"=>\"Mahila bag ka zalra\",\"tourism\"=>\"attraction\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0254799, 26.2965185] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4720015292",
+        "name": "Hostel La Vie",
+        "other_tags": "\"addr:street\"=>\"Kill Khana, Fort Road\",\"internet_access\"=>\"wlan\",\"name:es\"=>\"Hostel La Vie\",\"name:hi\"=>\"Hostel La Vie\",\"phone\"=>\"02912611001\",\"tourism\"=>\"hotel\",\"website\"=>\"https://www.hostelavie.com/\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0219472, 26.2970644] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "4793756321",
+        "other_tags": "\"name:en\"=>\"heaven family hotel\",\"tourism\"=>\"hotel\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0215304, 26.294635] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5002850121",
+        "name": "Misrilal hotel Lassi",
+        "other_tags": "\"amenity\"=>\"cafe\",\"internet_access\"=>\"wlan\",\"name:hi\"=>\"Misrilal hotel Lassi\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0241828, 26.2944084] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5007820523",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"indian\",\"name:en\"=>\"Al-Haq\",\"name:es\"=>\"Al-Haq\",\"opening_hours\"=>\"24/7\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0246985, 26.2927635] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5025441821",
+        "other_tags": "\"amenity\"=>\"cafe\",\"opening_hours\"=>\"Mo-Su 07:00-22:00\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0224393, 26.2964204] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5055644926",
+        "other_tags": "\"addr:housenumber\"=>\"1st pal haveli\",\"addr:postcode\"=>\"342001\",\"addr:street\"=>\"Sardar Dhaan Mandi\",\"amenity\"=>\"cafe\",\"cuisine\"=>\"burger;grill;asian;coffee_shop;malaysian;pasta;pancake;diner;italian_pizza;mexican;sushi;tea;japanese;italian;tapas;sandwich;ice_cream;cake;korean;donut;lebanese;russian;pizza;spanish;indian;french;german\",\"email\"=>\"frespressoclocktower@gmail.com\",\"internet_access\"=>\"wlan\",\"name:en\"=>\"Cafe Frespresso Coffee and Food\",\"opening_hours\"=>\"Mo-Su 09:00-21:00\",\"operator\"=>\"Ramesh Bhati\",\"phone\"=>\"9166638023\",\"website\"=>\"https://facebook.com/frespressoclocktower\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0238626, 26.2961272] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5081970828",
+        "name": "Cafe Frespresso Coffee and Food",
+        "other_tags": "\"addr:housenumber\"=>\"1st floor\",\"addr:postcode\"=>\"342001\",\"addr:street\"=>\"Sardar Dhaan Mandi\",\"amenity\"=>\"restaurant\",\"cuisine\"=>\"burger;grill;asian;coffee_shop;pasta;pancake;diner;curry;italian_pizza;tea;chinese;japanese;italian;deli;tapas;sandwich;international;ice_cream;cake;korean;bagel;donut;pizza;indian;breakfast;french;irish;local;fine_dining\",\"email\"=>\"frespressoclocktower@gmail.com\",\"internet_access\"=>\"wlan\",\"name:en\"=>\"Frespresso\",\"name:hi\"=>\"फ्रेसप्रेसओ\",\"opening_hours\"=>\"24/7\",\"operator\"=>\"Ramesh Bhati\",\"phone\"=>\"9166638023\",\"website\"=>\"https://www.facebook.com/frespressoclocktower\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0237975, 26.296085] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5176020621",
+        "other_tags": "\"amenity\"=>\"cafe\",\"cuisine\"=>\"coffee_shop;pizza;sandwich;tea;deli\",\"diet:vegetarian\"=>\"yes\",\"internet_access\"=>\"wlan\",\"name:en\"=>\"Stepwell cafe\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0230117, 26.2972413] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5226383234",
+        "name": "Ummed Kanya Senior Secondry School",
+        "other_tags": "\"amenity\"=>\"school\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0237426, 26.2970746] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5226393583",
+        "highway": "crossing",
+        "other_tags": "\"crossing\"=>\"pavement\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0228765, 26.296889] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5226442073",
+        "name": "Sunny Textiles",
+        "other_tags": "\"shop\"=>\"gift\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0220586, 26.2968272] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5226821287",
+        "highway": "crossing",
+        "other_tags": "\"crossing\"=>\"unmarked\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0222827, 26.2948773] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5226822674",
+        "name": "Sardar Mahal",
+        "other_tags": "\"historic\"=>\"monument\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0221518, 26.294638] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5227531221",
+        "other_tags": "\"name:en\"=>\"MV Spices\",\"shop\"=>\"supermarket\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0246493, 26.2928387] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5237989921",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"name:en\"=>\"Ravla\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0226054, 26.2966485] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5249040922",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"name:en\"=>\"Vijay Restaurant\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0199095, 26.293971] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5275329428",
+        "name": "Maharani Art Exporter",
+        "other_tags": "\"shop\"=>\"clothes\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0215399, 26.2940304] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5308494525",
+        "other_tags": "\"name:en\"=>\"Krishna Book - Radha Krishna Art Exports\",\"shop\"=>\"variety_store\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.02403, 26.2958081] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5335461921",
+        "name": "Om Juice Corner",
+        "other_tags": "\"amenity\"=>\"restaurant\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0237312, 26.2955453] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5344372222",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"name:en\"=>\"Om Cafe\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0223256, 26.2966207] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5354108823",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"pasta;indian;pizza\",\"name:en\"=>\"Open House Cafe\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0228805, 26.2971335] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "5522086634",
+        "name": "The Arch Boutique Home Stay",
+        "other_tags": "\"tourism\"=>\"hotel\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0228973, 26.2969701] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6050767386",
+        "other_tags": "\"name:en\"=>\"Bed and Breakfast\",\"tourism\"=>\"hotel\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0246705, 26.2959897] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6105769085",
+        "other_tags": "\"addr:street\"=>\"Manak Chowk\",\"description\"=>\"goldendreams444@gmail.com\",\"name:en\"=>\"Discovery guest house\",\"phone\"=>\"+919166989494\",\"tourism\"=>\"hostel\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0214044, 26.2957374] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6106477507",
+        "other_tags": "\"name:en\"=>\"Geeta Mahal\",\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0213909, 26.2965678] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6266841785",
+        "name": "Coffee Day",
+        "other_tags": "\"amenity\"=>\"cafe\",\"name:pa\"=>\"ਕੌਫੀ ਡੇ\",\"name:ur\"=>\"کافی ڈے\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0288053, 26.289678] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6331214285",
+        "other_tags": "\"name:he\"=>\"חנות של כלין\",\"tourism\"=>\"attraction\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0273217, 26.2942426] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6331214286",
+        "other_tags": "\"name:he\"=>\"חנות של כלים\",\"tourism\"=>\"attraction\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0258001, 26.2941326] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6332327985",
+        "other_tags": "\"name:he\"=>\"מקום חמוד לשבת.. אקסוליסב\",\"tourism\"=>\"apartment\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0229339, 26.2969324] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6332328085",
+        "other_tags": "\"name:he\"=>\"גופל גסטאהוס\",\"tourism\"=>\"apartment\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0223966, 26.2965879] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6332440285",
+        "other_tags": "\"name:he\"=>\"חנות מגניבה עם חטין מהממים ב50 רופי\",\"tourism\"=>\"apartment\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0226878, 26.2958524] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6332723286",
+        "other_tags": "\"name:he\"=>\"איזור של כלי מטבח\",\"shop\"=>\"bakery\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0223481, 26.2912464] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6332727185",
+        "other_tags": "\"name:he\"=>\"חנות מגניבה חוטים מהמים ב50\",\"tourism\"=>\"apartment\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0243807, 26.2925997] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6332727285",
+        "other_tags": "\"name:he\"=>\"גסטאהוס שלנו\",\"tourism\"=>\"apartment\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0212697, 26.2956852] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6336057385",
+        "other_tags": "\"name:he\"=>\"תבלינין וכל מיני בסגנון\",\"tourism\"=>\"apartment\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0222528, 26.2918495] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6337277588",
+        "other_tags": "\"name:he\"=>\"חנות 150\",\"tourism\"=>\"apartment\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0212434, 26.2955758] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6353072585",
+        "name": "Puesto Callejero",
+        "other_tags": "\"amenity\"=>\"fast_food\",\"name:es\"=>\"Puesto Callejero\",\"name:ur\"=>\"پوئسٹو کالیخیرو\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0237098, 26.2940092] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6463716886",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"indian;international\",\"name:en\"=>\"mancave\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.022132, 26.2968713] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6466804685",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"indian;international\",\"name:en\"=>\"bluebird restaurant and hotel\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0221573, 26.2966863] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6484272985",
+        "other_tags": "\"email\"=>\"anilkuman20042003@gmail.com\",\"name:de\"=>\"Gewürzhändler & Kochkurs\",\"name:en\"=>\"Spice Shop & Cooking Classes\",\"shop\"=>\"convenience\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0230399, 26.2958904] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6815273585",
+        "name": "60Rs barber",
+        "other_tags": "\"shop\"=>\"hairdresser\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0203073, 26.2948665] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "6971670485",
+        "name": "Zostel Jodhpur",
+        "other_tags": "\"tourism\"=>\"hostel\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0227808, 26.2969378] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "7037434085",
+        "name": "Gopal Guesthouse and Restaurant",
+        "other_tags": "\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0223489, 26.2964664] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "7208157685",
+        "other_tags": "\"addr:postcode\"=>\"342001\",\"addr:street\"=>\"First Floor, Pal Haveli, opposite North Gate - Sardar Market, Clocktower, Jodhpur\",\"amenity\"=>\"cafe\",\"cuisine\"=>\"regional;noodles;asian;pancake;sandwich;vietnamese;curry;coffee_shop;ice_cream;local;deli;tea;burger;breakfast;international;indian\",\"diet:vegan\"=>\"yes\",\"email\"=>\"sukesh.jodhpur@gmail.com\",\"internet_access\"=>\"wlan\",\"name:de\"=>\"Café Royale\",\"name:en\"=>\"Café Royale\",\"opening_hours\"=>\"Mo-Su 09:00-21:00\",\"phone\"=>\"+917014322302\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0239805, 26.2961727] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "7250041107",
+        "name": "Wine Shop",
+        "other_tags": "\"name:ur\"=>\"شراب کی دکان\",\"shop\"=>\"alcohol\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.02438, 26.2929344] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "7271689285",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"indian\",\"name:en\"=>\"Nihari's\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0246602, 26.2929622] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "osm_id": "7508603683", "barrier": "gate" },
+      "geometry": { "type": "Point", "coordinates": [73.0161568, 26.2971871] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "7682424056",
+        "name": "Dr. N.K. rora",
+        "other_tags": "\"addr:district\"=>\"Jodhpur\",\"addr:full\"=>\"Gulab Sagar, Jodhpur\",\"addr:postcode\"=>\"342001\",\"addr:state\"=>\"Rajasthan\",\"amenity\"=>\"doctors\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0263245, 26.2968994] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "7682424091",
+        "name": "Dr. Tarique Hussain Clinic",
+        "other_tags": "\"addr:district\"=>\"Jodhpur\",\"addr:full\"=>\"Gulab Sagar\",\"addr:postcode\"=>\"342001\",\"addr:state\"=>\"Rajasthan\",\"amenity\"=>\"clinic\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0276337, 26.2975695] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "7682424093",
+        "name": "Mahila Bagh Hospital",
+        "other_tags": "\"addr:district\"=>\"Jodhpur\",\"addr:full\"=>\"Gulab Sagar, Jodhpur\",\"addr:postcode\"=>\"342001\",\"addr:state\"=>\"Rajasthan\",\"amenity\"=>\"hospital\",\"healthcare\"=>\"hospital\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0248915, 26.2960594] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "8133390517",
+        "name": "Tanus guesthouse",
+        "other_tags": "\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0210141, 26.2966077] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "9290593004",
+        "other_tags": "\"natural\"=>\"tree\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0242154, 26.2961543] }
+    },
+    {
+      "type": "Feature",
+      "properties": { "osm_id": "9291737368" },
+      "geometry": { "type": "Point", "coordinates": [73.0222397, 26.2935078] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10029284218",
+        "name": "Jee Ri Guesthouse",
+        "other_tags": "\"internet_access\"=>\"wlan\",\"name:de\"=>\"Jee Ri Haveli\",\"name:en\"=>\"Jee Ri Haveli\",\"name:hi\"=>\"Jee Ri Haveli\",\"tourism\"=>\"hostel\",\"website\"=>\"http://jeerihaveli.com/\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0261464, 26.2972768] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10083765917",
+        "other_tags": "\"amenity\"=>\"cafe\",\"name:en\"=>\"Sam’s Art Café\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0227955, 26.2969048] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10225625720",
+        "name": "beli chicken",
+        "other_tags": "\"amenity\"=>\"restaurant\",\"cuisine\"=>\"indian\",\"name:en\"=>\"Beli chicken\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0291937, 26.2917467] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10261562486",
+        "name": "Kim Mohan's Restaurant",
+        "other_tags": "\"addr:street\"=>\"Surya Colony\",\"amenity\"=>\"restaurant\",\"description\"=>\"Korean Website\",\"phone\"=>\"9983335449\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0203308, 26.2968153] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10261563104",
+        "name": "Bishnoi Village Art",
+        "other_tags": "\"addr:housenumber\"=>\"10\",\"addr:street\"=>\"Sardar Market\",\"description\"=>\"Fabric, cloth, bag manufacturer and shop\",\"phone\"=>\"+918003713901\",\"shop\"=>\"fabric\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0235628, 26.2956516] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10261614171",
+        "name": "Mohanlal Verhomal (MV) Spices (new shop)",
+        "other_tags": "\"addr:housenumber\"=>\"107\",\"addr:street\"=>\"Nai Sarak\",\"description\"=>\"Manufacturers of all kind of spices run by women.\",\"phone\"=>\"+919314951961\",\"shop\"=>\"spices\",\"website\"=>\"https://www.mvspices.com/\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0245583, 26.293401] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10261616711",
+        "name": "Golden dreams Guesthouse",
+        "other_tags": "\"addr:street\"=>\"manak chowak\",\"phone\"=>\"9166989494\",\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0214342, 26.2956806] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10261620024",
+        "name": "Sunshine Guesthouse",
+        "other_tags": "\"addr:street\"=>\"Surya Colony\",\"description\"=>\"with sunrise room\",\"phone\"=>\"9928323523\",\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0203714, 26.296848] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10261623040",
+        "name": "Suncity Spices",
+        "other_tags": "\"addr:housenumber\"=>\"112\",\"addr:street\"=>\"nai sarak\",\"description\"=>\"Spices and tea and perfume and encens shop\",\"phone\"=>\"+919799670081\",\"shop\"=>\"spices\",\"website\"=>\"https://www.suncityspices.com/\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0245752, 26.2933283] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10264964749",
+        "name": "Neela House",
+        "other_tags": "\"addr:housenumber\"=>\"224\",\"addr:street\"=>\"Sadar Market\",\"phone\"=>\"+917976202392\",\"shop\"=>\"craft\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0236687, 26.2957471] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10264979938",
+        "name": "Ganesh Handicrafts",
+        "other_tags": "\"addr:housenumber\"=>\"84\",\"addr:street\"=>\"Nai Sarak\",\"craft\"=>\"handicraft\",\"phone\"=>\"+912912624165\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0243501, 26.2934257] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10297947809",
+        "other_tags": "\"amenity\"=>\"bus_station\",\"name:en\"=>\"From Mandore\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.026066, 26.2902473] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10617456205",
+        "name": "Qureshi Kabab House",
+        "other_tags": "\"addr:street\"=>\"Tripolia Market\",\"amenity\"=>\"restaurant\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0229708, 26.28934] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10639001305",
+        "name": "Bang lassi",
+        "other_tags": "\"shop\"=>\"beverages\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.024225, 26.2926331] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10751037509",
+        "name": "Gopal Roof Top Restaurant",
+        "other_tags": "\"amenity\"=>\"restaurant\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0222089, 26.2964034] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10751046126",
+        "name": "Madhur Villa Guest House",
+        "other_tags": "\"addr:street\"=>\"Killi Khana Naya Bass\",\"description\"=>\"Near Makrana Mohalla, Clock Tower Area\",\"phone\"=>\"+919772672354\",\"tourism\"=>\"guest_house\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0216483, 26.2971705] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "10752380073",
+        "name": "Sam’s art cafe",
+        "other_tags": "\"amenity\"=>\"cafe\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0227755, 26.296864] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "11396088141",
+        "name": "Hotel Heritage Kuchaman",
+        "other_tags": "\"tourism\"=>\"hotel\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0284365, 26.2954172] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "11478839339",
+        "name": "Blueberrys Cafe at Yogis",
+        "other_tags": "\"amenity\"=>\"cafe\",\"check_date\"=>\"2024-01-02\",\"wheelchair\"=>\"no\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0211055, 26.296596] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "11535082467",
+        "other_tags": "\"entrance\"=>\"main\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.021197, 26.2965462] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "12037307990",
+        "ref": "342001",
+        "other_tags": "\"amenity\"=>\"post_box\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0240539, 26.2949787] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "12384964894",
+        "other_tags": "\"amenity\"=>\"fountain\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0247042, 26.2970917] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "12384975224",
+        "barrier": "gate",
+        "other_tags": "\"locked\"=>\"yes\",\"material\"=>\"metal\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.0255578, 26.2965139] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "12401925703",
+        "other_tags": "\"amenity\"=>\"atm\",\"opening_hours\"=>\"24/7\",\"operator\"=>\"IndusInd Bank\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.02435, 26.2932113] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "osm_id": "12595686349",
+        "highway": "turning_circle",
+        "other_tags": "\"turning_circle\"=>\"circle\""
+      },
+      "geometry": { "type": "Point", "coordinates": [73.03794, 26.3061811] }
+    }
+  ]
+}

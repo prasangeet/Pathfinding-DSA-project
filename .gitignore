@@ -42,3 +42,4 @@ build
 # Environment variables and folders
 .env
 venv
+linuxEnv
