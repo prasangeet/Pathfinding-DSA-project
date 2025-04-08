@@ -1,7 +1,7 @@
-# Pathfinding System with Django, Next.js, and Redis
+# Pathfinding System with Django, Next.js, and PostgreSQL
 
 ## Project Overview
-This project implements a **Shortest Pathfinding System** using **Dijkstra's Algorithm** and **A***. The backend is built with **Django**, the frontend with **Next.js**, and the shortest path computation is optimized using **Redis caching** for performance. The project also integrates **OpenStreetMap (OSM)** data for geospatial mapping and visualization.
+This project implements a **Shortest Pathfinding System** using **Dijkstra's Algorithm** and **A***. The backend is built with **Django**, the frontend with **Next.js**, and the shortest path computation is performed efficiently using in-memory processing. The project integrates **OpenStreetMap (OSM)** data for geospatial mapping and visualization.
 
 ---
 
@@ -11,11 +11,11 @@ project_root/
 │── backend/            # Django Backend
 │   ├── shortest_path/  # Django Project
 │   │   ├── manage.py       # Django project manager
-│   │   ├── shortest_path/        # Main Django app
-│   │   ├── maps/         # Django routes app
+│   │   ├── shortest_path/  # Main Django app
+│   │   ├── maps/           # Django routes app
 │   │   │   ├── models.py   # Database models
 │   │   │   ├── views.py    # API views
-│   ├── utils/          # Utils to populate the data int the database
+│   ├── utils/              # Utils to populate the data into the database
 │── frontend/           # Next.js Frontend
 │   ├── components/     # React components
 │   ├── pages/          # Next.js pages
@@ -121,47 +121,21 @@ The Next.js application will be available at `http://localhost:3000/`.
 ---
 
 ## 🔥 Implementing the Shortest Path Algorithm
-### **Using Redis Caching for Performance**
-We use Redis to cache the graph data to improve performance. The graph is loaded from the database and cached automatically.
 
-#### **Steps Implemented for Caching:**
-- **Graph Data Caching:**
-  - The adjacency list representation of the graph is stored in Redis for quick access.
-  - If Redis is down, the data is loaded from the database.
-- **Pathfinding Cache:**
-  - Frequently accessed shortest paths are cached to prevent redundant computations.
+### **Pathfinding Flow**
+- Graph data is loaded from the PostgreSQL database.
+- An in-memory adjacency list is created for efficient pathfinding.
+- The shortest path is computed using Dijkstra's Algorithm or A*, depending on the scenario.
 
-#### **How to Use Redis Cache in Django?**
-Since Redis is **open in the cloud**, no setup is needed. We directly integrate it into Django settings.
-
+#### **Example: Loading Graph in Django**
 ```python
-# settings.py
-CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://your-redis-instance-url',
-    }
-}
-```
-
-#### **Loading Graph from Cache**
-```python
-from django.core.cache import cache
-
 def load_graph():
-    cached_graph = cache.get("graph_data")
-    if cached_graph:
-        return cached_graph
-    
-    # Load from database if not cached
     nodes = Node.objects.all()
     edges = Edge.objects.all()
     graph = {node.id: [] for node in nodes}
     for edge in edges:
         graph[edge.start_node_id].append((edge.end_node_id, edge.weight))
         graph[edge.end_node_id].append((edge.start_node_id, edge.weight))
-    
-    cache.set("graph_data", graph)
     return graph
 ```
 
@@ -180,14 +154,11 @@ def load_graph():
 - **Database:** PostgreSQL + PostGIS
 - **Pathfinding:** Dijkstra’s Algorithm, A*
 - **Geospatial Data:** OpenStreetMap (OSM), GeoJSON
-- **Caching:** Redis
 
 ---
 
 ## 💡 Contributors
-- **Prasangeet Dongre (B23CH1033)** - Project Lead
-- **Prakhar Chauhan (B23BB1032)**
-- **Rajas Kadu (B23CH1039)**
-- **Mayuri R. Pujari (B23ES1026)**
-
-
+- **Prasangeet Dongre (B23CH1033)** - Project Lead  
+- **Prakhar Chauhan (B23BB1032)**  
+- **Rajas Kadu (B23CH1039)**  
+- **Mayuri R. Pujari (B23ES1026)**  
