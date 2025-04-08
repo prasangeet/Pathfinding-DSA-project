@@ -15,6 +15,7 @@ project_root/
 │   │   ├── maps/         # Django routes app
 │   │   │   ├── models.py   # Database models
 │   │   │   ├── views.py    # API views
+│   ├── utils/          # Utils to populate the data int the database
 │── frontend/           # Next.js Frontend
 │   ├── components/     # React components
 │   ├── pages/          # Next.js pages
@@ -29,32 +30,8 @@ project_root/
 ---
 
 ## 🚀 Setting Up the Project
-### 1️⃣ Preparing **Geospatial Data**
-#### **Step 1: Download the OSM Data**
-We need to extract a slice of OpenStreetMap (OSM) data for a specific region.
-- Example: **Jodhpur.osm.pbf**
 
-#### **Step 2: Convert OSM to MBTiles**
-Install **Docker Desktop** and run the following command:
-
-```sh
-cd backend/utils
-
-docker run --rm -it -v ${PWD}:/data -p 8080:8080 maptiler/tileserver-gl --file /data/jodhpur.mbtiles
-```
-
-This command starts a **Tile Server** to serve the **.mbtiles** data.
-
-#### **Step 3: Convert .osm.pbf to .geojson**
-Use online tools or libraries like `osmtogeojson` to convert the data:
-
-```sh
-osmtogeojson jodhpur.osm.pbf > jodhpur.geojson
-```
-
----
-
-### 2️⃣ Setting up **Django Backend**
+### 1️⃣ Setting up **Django Backend**
 #### **Step 1: Create a Virtual Environment**
 ```sh
 pip install venv
@@ -74,12 +51,12 @@ source venv/bin/activate
 #### **Step 3: Install Dependencies**
 ```sh
 cd backend
-pip install --no-deps -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
 
-### 3️⃣ Setting up **PostgreSQL Database**
+### 2️⃣ Setting up **PostgreSQL Database**
 #### **Step 1: Install PostgreSQL**
 Download PostgreSQL from the official site: [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
 
@@ -103,14 +80,13 @@ python manage.py migrate
 #### **Step 3: Populate the Database with OSM Data**
 Run the following utility scripts:
 ```sh
-python backend/utils/util_jodhpur.py
 python backend/utils/util_pune.py
 ```
 This will populate the database with geospatial data.
 
 ---
 
-### 4️⃣ Setting up **Next.js Frontend**
+### 3️⃣ Setting up **Next.js Frontend**
 #### **Step 1: Install Node.js and npm**
 Download and install Node.js from [https://nodejs.org/](https://nodejs.org/).
 
@@ -135,7 +111,7 @@ The Next.js application will be available at `http://localhost:3000/`.
 
 ---
 
-### 5️⃣ Features of the Frontend
+### 4️⃣ Features of the Frontend
 - **Interactive Map:** Displays OpenStreetMap with path visualization.
 - **Shortest Path Calculation:** Users can select two points, and the shortest path is computed and displayed.
 - **Live Updates:** The frontend dynamically fetches routes from the backend API.
@@ -209,15 +185,9 @@ def load_graph():
 ---
 
 ## 💡 Contributors
-- **[Your Name]** - Project Lead
-- **[Other Contributors]**
+- **Prasangeet Dongre (B23CH1033)** - Project Lead
+- **Prakhar Chauhan (B23BB1032)**
+- **Rajas Kadu (B23CH1039)**
+- **Mayuri R. Pujari (B23ES1026)**
 
-Feel free to contribute by submitting PRs or opening issues!
-
----
-
-## 📜 License
-This project is licensed under the **MIT License**.
-
-Happy Coding! 🚀
 
