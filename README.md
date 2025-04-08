@@ -1,7 +1,7 @@
 # Pathfinding System with Django, Next.js, and PostgreSQL
 
 ## Project Overview
-This project implements a **Shortest Pathfinding System** using **Dijkstra's Algorithm** and **A***. The backend is built with **Django**, the frontend with **Next.js**, and the shortest path computation is performed efficiently using in-memory processing. The project integrates **OpenStreetMap (OSM)** data for geospatial mapping and visualization.
+This project implements a **Shortest Pathfinding System** using **Dijkstra's Algorithm** and **A***. The backend is built with **Django**, the frontend with **Next.js**, and the shortest path computation is performed efficiently using **file-based caching**. The project integrates **OpenStreetMap (OSM)** data for geospatial mapping and visualization.
 
 ---
 
@@ -78,7 +78,7 @@ python manage.py migrate
 ```
 
 #### **Step 3: Populate the Database with OSM Data**
-Run the following utility scripts:
+Run the following utility script:
 ```sh
 python backend/utils/util_pune.py
 ```
@@ -122,20 +122,45 @@ The Next.js application will be available at `http://localhost:3000/`.
 
 ## 🔥 Implementing the Shortest Path Algorithm
 
-### **Pathfinding Flow**
-- Graph data is loaded from the PostgreSQL database.
-- An in-memory adjacency list is created for efficient pathfinding.
-- The shortest path is computed using Dijkstra's Algorithm or A*, depending on the scenario.
+### **Using File-Based Caching for Performance**
+We use Django’s **file-based caching** to cache graph data and prevent repeated database reads, speeding up the algorithm.
 
-#### **Example: Loading Graph in Django**
+#### **Steps Implemented for Caching:**
+- **Graph Data Caching:**
+  - An adjacency list representation of the graph is cached in the filesystem.
+  - If cache is missing or expired, data is loaded from the database and cached again.
+
+#### **Django Settings**
 ```python
+# settings.py
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'graph_cache'),
+    }
+}
+```
+
+Make sure the `graph_cache/` directory exists and is writable.
+
+#### **Graph Loading Function**
+```python
+from django.core.cache import cache
+
 def load_graph():
+    graph = cache.get("graph_data")
+    if graph:
+        return graph
+
+    # Load graph from DB if not cached
     nodes = Node.objects.all()
     edges = Edge.objects.all()
     graph = {node.id: [] for node in nodes}
     for edge in edges:
         graph[edge.start_node_id].append((edge.end_node_id, edge.weight))
         graph[edge.end_node_id].append((edge.start_node_id, edge.weight))
+
+    cache.set("graph_data", graph)
     return graph
 ```
 
@@ -154,6 +179,7 @@ def load_graph():
 - **Database:** PostgreSQL + PostGIS
 - **Pathfinding:** Dijkstra’s Algorithm, A*
 - **Geospatial Data:** OpenStreetMap (OSM), GeoJSON
+- **Caching:** Django File-Based Caching
 
 ---
 
