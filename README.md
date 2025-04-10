@@ -1,7 +1,7 @@
-# Pathfinding System with Django, Next.js, and Redis
+# Pathfinding System with Django, Next.js, and PostgreSQL
 
 ## Project Overview
-This project implements a **Shortest Pathfinding System** using **Dijkstra's Algorithm** and **A***. The backend is built with **Django**, the frontend with **Next.js**, and the shortest path computation is optimized using **Redis caching** for performance. The project also integrates **OpenStreetMap (OSM)** data for geospatial mapping and visualization.
+This project implements a **Shortest Pathfinding System** using **Dijkstra's Algorithm** and **A***. The backend is built with **Django**, the frontend with **Next.js**, and the shortest path computation is performed efficiently using **file-based caching**. The project integrates **OpenStreetMap (OSM)** data for geospatial mapping and visualization.
 
 ---
 
@@ -11,10 +11,11 @@ project_root/
 │── backend/            # Django Backend
 │   ├── shortest_path/  # Django Project
 │   │   ├── manage.py       # Django project manager
-│   │   ├── shortest_path/        # Main Django app
-│   │   ├── maps/         # Django routes app
+│   │   ├── shortest_path/  # Main Django app
+│   │   ├── maps/           # Django routes app
 │   │   │   ├── models.py   # Database models
 │   │   │   ├── views.py    # API views
+│   ├── utils/              # Utils to populate the data into the database
 │── frontend/           # Next.js Frontend
 │   ├── components/     # React components
 │   ├── pages/          # Next.js pages
@@ -29,32 +30,8 @@ project_root/
 ---
 
 ## 🚀 Setting Up the Project
-### 1️⃣ Preparing **Geospatial Data**
-#### **Step 1: Download the OSM Data**
-We need to extract a slice of OpenStreetMap (OSM) data for a specific region.
-- Example: **Jodhpur.osm.pbf**
 
-#### **Step 2: Convert OSM to MBTiles**
-Install **Docker Desktop** and run the following command:
-
-```sh
-cd backend/utils
-
-docker run --rm -it -v ${PWD}:/data -p 8080:8080 maptiler/tileserver-gl --file /data/jodhpur.mbtiles
-```
-
-This command starts a **Tile Server** to serve the **.mbtiles** data.
-
-#### **Step 3: Convert .osm.pbf to .geojson**
-Use online tools or libraries like `osmtogeojson` to convert the data:
-
-```sh
-osmtogeojson jodhpur.osm.pbf > jodhpur.geojson
-```
-
----
-
-### 2️⃣ Setting up **Django Backend**
+### 1️⃣ Setting up **Django Backend**
 #### **Step 1: Create a Virtual Environment**
 ```sh
 pip install venv
@@ -74,12 +51,12 @@ source venv/bin/activate
 #### **Step 3: Install Dependencies**
 ```sh
 cd backend
-pip install --no-deps -r requirements.txt
+pip install -r requirements.txt
 ```
 
 ---
 
-### 3️⃣ Setting up **PostgreSQL Database**
+### 2️⃣ Setting up **PostgreSQL Database**
 #### **Step 1: Install PostgreSQL**
 Download PostgreSQL from the official site: [https://www.postgresql.org/download/](https://www.postgresql.org/download/)
 
@@ -101,16 +78,15 @@ python manage.py migrate
 ```
 
 #### **Step 3: Populate the Database with OSM Data**
-Run the following utility scripts:
+Run the following utility script:
 ```sh
-python backend/utils/util_jodhpur.py
 python backend/utils/util_pune.py
 ```
 This will populate the database with geospatial data.
 
 ---
 
-### 4️⃣ Setting up **Next.js Frontend**
+### 3️⃣ Setting up **Next.js Frontend**
 #### **Step 1: Install Node.js and npm**
 Download and install Node.js from [https://nodejs.org/](https://nodejs.org/).
 
@@ -135,7 +111,7 @@ The Next.js application will be available at `http://localhost:3000/`.
 
 ---
 
-### 5️⃣ Features of the Frontend
+### 4️⃣ Features of the Frontend
 - **Interactive Map:** Displays OpenStreetMap with path visualization.
 - **Shortest Path Calculation:** Users can select two points, and the shortest path is computed and displayed.
 - **Live Updates:** The frontend dynamically fetches routes from the backend API.
@@ -145,46 +121,45 @@ The Next.js application will be available at `http://localhost:3000/`.
 ---
 
 ## 🔥 Implementing the Shortest Path Algorithm
-### **Using Redis Caching for Performance**
-We use Redis to cache the graph data to improve performance. The graph is loaded from the database and cached automatically.
+
+### **Using File-Based Caching for Performance**
+We use Django’s **file-based caching** to cache graph data and prevent repeated database reads, speeding up the algorithm.
 
 #### **Steps Implemented for Caching:**
 - **Graph Data Caching:**
-  - The adjacency list representation of the graph is stored in Redis for quick access.
-  - If Redis is down, the data is loaded from the database.
-- **Pathfinding Cache:**
-  - Frequently accessed shortest paths are cached to prevent redundant computations.
+  - An adjacency list representation of the graph is cached in the filesystem.
+  - If cache is missing or expired, data is loaded from the database and cached again.
 
-#### **How to Use Redis Cache in Django?**
-Since Redis is **open in the cloud**, no setup is needed. We directly integrate it into Django settings.
-
+#### **Django Settings**
 ```python
 # settings.py
 CACHES = {
     'default': {
-        'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://your-redis-instance-url',
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(BASE_DIR, 'graph_cache'),
     }
 }
 ```
 
-#### **Loading Graph from Cache**
+Make sure the `graph_cache/` directory exists and is writable.
+
+#### **Graph Loading Function**
 ```python
 from django.core.cache import cache
 
 def load_graph():
-    cached_graph = cache.get("graph_data")
-    if cached_graph:
-        return cached_graph
-    
-    # Load from database if not cached
+    graph = cache.get("graph_data")
+    if graph:
+        return graph
+
+    # Load graph from DB if not cached
     nodes = Node.objects.all()
     edges = Edge.objects.all()
     graph = {node.id: [] for node in nodes}
     for edge in edges:
         graph[edge.start_node_id].append((edge.end_node_id, edge.weight))
         graph[edge.end_node_id].append((edge.start_node_id, edge.weight))
-    
+
     cache.set("graph_data", graph)
     return graph
 ```
@@ -204,20 +179,12 @@ def load_graph():
 - **Database:** PostgreSQL + PostGIS
 - **Pathfinding:** Dijkstra’s Algorithm, A*
 - **Geospatial Data:** OpenStreetMap (OSM), GeoJSON
-- **Caching:** Redis
+- **Caching:** Django File-Based Caching
 
 ---
 
 ## 💡 Contributors
-- **[Your Name]** - Project Lead
-- **[Other Contributors]**
-
-Feel free to contribute by submitting PRs or opening issues!
-
----
-
-## 📜 License
-This project is licensed under the **MIT License**.
-
-Happy Coding! 🚀
-
+- **Prasangeet Dongre (B23CH1033)** - Project Lead  
+- **Prakhar Chauhan (B23BB1032)**  
+- **Rajas Kadu (B23CH1039)**  
+- **Mayuri R. Pujari (B23ES1026)**  
