@@ -182,6 +182,11 @@ def load_graph():
 - **Caching:** Django File-Based Caching
 
 ---
+## 📽️ Demo
+
+▶️ [Watch demo video](./doc/demoVideo.mkv)
+
+---
 
 ## 💡 Contributors
 - **Prasangeet Dongre (B23CH1033)** - Project Lead  
