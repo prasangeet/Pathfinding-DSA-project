@@ -4,7 +4,11 @@ django-cors-headers
 geopandas
 shapely
 pandas
+<<<<<<< HEAD
 psycopg2-binary
+=======
+psycopg2
+>>>>>>> c5259a267b21b40c565b759c35b3b6d61b236039
 python-dotenv
 pytz
 six
@@ -14,8 +18,11 @@ packaging
 numpy>=1.22
 pyogrio>=0.7.2
 pyproj>=3.3.0
+<<<<<<< HEAD
 pyproject
 screen
+=======
+>>>>>>> c5259a267b21b40c565b759c35b3b6d61b236039
 python-dateutil>=2.8.2
 redis 
 django-redis
