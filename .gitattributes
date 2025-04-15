@@ -2,3 +2,4 @@
 *.geojson filter=lfs diff=lfs merge=lfs -text
 backend/utils/graph_data.json filter=lfs diff=lfs merge=lfs -text
 backend/utils/pune.osm.geojson filter=lfs diff=lfs merge=lfs -text
+*.mkv filter=lfs diff=lfs merge=lfs -text
