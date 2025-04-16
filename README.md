@@ -184,7 +184,7 @@ def load_graph():
 ---
 ## 📽️ Demo
 
-▶️ [Watch demo video](./doc/demoVideo.mkv)
+▶️ [Watch demo video]((https://youtu.be/_glTUhynvPo))
 
 ---
 
